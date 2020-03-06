@@ -76,7 +76,7 @@ class AlienInvasion:
         if button_clicked and not self.stats.game_active:
             # Reset the game settings.
             self.settings.initialize_dynamic_settings()
-            
+
             # Reset the games statistics.
             self.stats.reset_stats()
             self.stats.game_active = True
@@ -238,6 +238,16 @@ class AlienInvasion:
                 # Treat this the same as if the ship got hit.
                 self._ship_hit()
                 break
+
+    def prep_score(self):
+        """Turn the score into a rendered image."""
+        score_str = str(self.stats.score)
+        self.score_image = self.font.render(score_str, True, self.text_color, self.settings.by_color)
+
+        # Display the score at the top right of the screen.
+        self.score_rect = self.score_image.get_rect()
+        self.score_rect.right = self.screen_rect.right - 20
+        self.score_rect.top = 20
 
 if __name__ == '__main__':
     # Make a game instance, and run the game.
